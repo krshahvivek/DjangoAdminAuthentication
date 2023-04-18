@@ -36,7 +36,7 @@ def home(request):
 
         if post_id:
             post = Post.objects.filter(id=post_id).first()
-            if post and (post.author == request.user or request.user.has_perm("main.delete_post")):
+            if post and (post.author == request.user or request.user.has_perm("additionsApp.delete_post")):
                 post.delete()
         elif user_id:
             user = User.objects.filter(id=user_id).first()
@@ -48,7 +48,7 @@ def home(request):
                     pass
 
                 try:
-                    group = Group.objects.get(name='mod')
+                    group = Group.objects.get(name='normaluser')
                     group.user_set.remove(user)
                 except:
                     pass
@@ -56,7 +56,7 @@ def home(request):
     return render(request, 'main/home.html', {"posts": posts})
 
 @login_required(login_url="/login")
-@permission_required("main.add_post", login_url="/login", raise_exception=True)
+@permission_required("additionApp.add_post", login_url="/login", raise_exception=True)
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
