@@ -1,0 +1,4 @@
+{
+    "secretsJson": "secrets.json",
+    "maxRetries": 3
+}
